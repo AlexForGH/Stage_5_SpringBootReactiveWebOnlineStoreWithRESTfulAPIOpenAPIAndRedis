@@ -1,0 +1,65 @@
+# SpringBootReactiveWebOnlineStore
+## *EN*
+#### Link to the previous project based on the Spring Boot and blocking technology stack: https://github.com/AlexForGH/SpringBootWebOnlineStore.git
+#### Link to the following project based on the Spring Boot and reactive technology stack with RESTful API, Open API and Spring Data Redis: https://github.com/AlexForGH/SpringBootReactiveWebOnlineStoreWithRESTfulAPIOpenAPIAndRedis.git
+#### The project demonstrates development capabilities using Spring Boot on a reactive technology stack: Spring WebFlux, Spring Data R2DBC.
+#### Technology stack: Spring Framework, Spring Boot, H2DB, HTML, Thymeleaf, Spring WebFlux, Spring Data R2DBC, Docker (Multi Stage Build).
+
+### Application features:
+    - filling the shopping cart with products
+    - editing the shopping cart
+    - removing products from the cart
+    - searching for products by name
+    - sorting products
+    - creating orders for products
+
+### Application deployment:
+    - Before you begin, you'll need:
+            - Java (JRE) (version 23 was used during project development)
+            - Docker (Multi Stage Build)
+    1. Using an IDE (IntelliJIdea was used during project development):
+            - clone the repository
+            - open the project in the IDE
+            - right‑click on the Dockerfile and select “Run Dockerfile”
+            - go to the browser at http://localhost:8080/
+            - the application's start page will open
+    2. Without an IDE
+            - clone the repository
+            - run the following Docker commands:
+                - docker build -t sb‑web‑store‑app .
+                - docker run -p 8080:8080 sb‑web‑store‑app:latest
+            - go to the browser at http://localhost:8080/
+                - the application's start page will open.
+
+
+## *RU*
+#### Ссылка на предыдущий проект на основе Spring Boot и блокирующего стека технологий: https://github.com/AlexForGH/SpringBootWebOnlineStore.git
+#### Ссылка на следующий проект на основе Spring Boot и реактивного стека технологий с RESTful API, Open API и Spring Data Redis: https://github.com/AlexForGH/SpringBootReactiveWebOnlineStoreWithRESTfulAPIOpenAPIAndRedis.git
+#### Проект для демонстрации возможностей разработки с использованием Spring Boot на реактивном стеке технологий: Spring WebFlux, Spring Data R2DBC.
+#### Технологический стек: Spring Framework, Spring Boot, H2DB, HTML, Thymeleaf, Spring WebFlux, Spring Data R2DBC, Docker (Multi Stage Build).
+
+### Возможности приложения:
+    - наполнение корзины товаров
+    - редактирование корзины
+    - удаление товаров из корзины
+    - поиск товаров по названию
+    - сортировка товаров
+    - создание заказов на товары
+
+### Развертывание приложения:
+    - Перед началом работы необходимы:
+            - Java (JRE) (при разработке проекта использовалась версия 23)
+            - Docker (Multi Stage Build)
+    1. Через IDE (при разработке проекта использовалась IntelliJIdea):
+            - клонировать репозиторий
+            - открыть проект в IDE
+            - нажать ПКМ на Dockerfile и выбрать "Run Dockerfile"
+            - зайти в браузер по адресу http://localhost:8080/
+            - откроется стартовая страница приложения
+    2. Без использования IDE
+            - клонировать репозиторий
+            - выполнить команды докера:
+                    - docker build -t sb-web-store-app .
+                    - docker run -p 8080:8080 sb-web-store-app:latest
+            - зайти в браузер по адресу http://localhost:8080/
+            - откроется стартовая страница приложения.
