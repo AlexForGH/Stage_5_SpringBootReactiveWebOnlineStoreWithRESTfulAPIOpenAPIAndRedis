@@ -1,9 +1,8 @@
-# SpringBootReactiveWebOnlineStore
+# SpringBootReactiveWebOnlineStoreWithRESTfulAPIOpenAPIAndRedis
 ## *EN*
-#### Link to the previous project based on the Spring Boot and blocking technology stack: https://github.com/AlexForGH/SpringBootWebOnlineStore.git
-#### Link to the following project based on the Spring Boot and reactive technology stack with RESTful API, Open API and Spring Data Redis: https://github.com/AlexForGH/SpringBootReactiveWebOnlineStoreWithRESTfulAPIOpenAPIAndRedis.git
-#### The project demonstrates development capabilities using Spring Boot on a reactive technology stack: Spring WebFlux, Spring Data R2DBC.
-#### Technology stack: Spring Framework, Spring Boot, H2DB, HTML, Thymeleaf, Spring WebFlux, Spring Data R2DBC, Docker (Multi Stage Build).
+#### Link to the previous project based on the Spring Boot and reactive technology stack: https://github.com/AlexForGH/SpringBootReactiveWebOnlineStore.git
+#### The project demonstrates development capabilities using Spring Boot on a reactive technology stack with the development of a RESTful service, Open API specification and caching via Redis: Spring WebFlux, Spring Data R2DBC, RESTful API, Open API, Spring Data Redis.
+#### Technology stack: Spring Framework, Spring Boot, H2DB, HTML, Thymeleaf, Spring WebFlux, Spring Data R2DBC, Docker (Multi Stage Build), RESTful API, Open API, Spring Data Redis.
 
 ### Application features:
     - filling the shopping cart with products
@@ -33,10 +32,9 @@
 
 
 ## *RU*
-#### Ссылка на предыдущий проект на основе Spring Boot и блокирующего стека технологий: https://github.com/AlexForGH/SpringBootWebOnlineStore.git
-#### Ссылка на следующий проект на основе Spring Boot и реактивного стека технологий с RESTful API, Open API и Spring Data Redis: https://github.com/AlexForGH/SpringBootReactiveWebOnlineStoreWithRESTfulAPIOpenAPIAndRedis.git
-#### Проект для демонстрации возможностей разработки с использованием Spring Boot на реактивном стеке технологий: Spring WebFlux, Spring Data R2DBC.
-#### Технологический стек: Spring Framework, Spring Boot, H2DB, HTML, Thymeleaf, Spring WebFlux, Spring Data R2DBC, Docker (Multi Stage Build).
+#### Ссылка на предыдущий проект на основе Spring Boot и реактивного стека технологий: https://github.com/AlexForGH/SpringBootReactiveWebOnlineStore.git
+#### Проект для демонстрации возможностей разработки с использованием Spring Boot на реактивном стеке технологий с разработкой RESTful сервиса, спецификации Open API и организации кэширования через Redis: Spring WebFlux, Spring Data R2DBC, RESTful API, Open API, Spring Data Redis.
+#### Технологический стек: Spring Framework, Spring Boot, H2DB, HTML, Thymeleaf, Spring WebFlux, Spring Data R2DBC, Docker (Multi Stage Build), RESTful API, Open API, Spring Data Redis.
 
 ### Возможности приложения:
     - наполнение корзины товаров
