@@ -1,0 +1,130 @@
+openapi: 3.0.3
+info:
+  title: Payment Service
+  description: API for managing user balance (get and update).
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Local development server
+
+paths:
+  /api/balance/{userId}:
+    get:
+      summary: Get user balance
+      description: Retrieves the current balance for a specific user
+      operationId: getUserBalance
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: Unique identifier of the user
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful response with user balance
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BalanceResponse'
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+    put:
+      summary: Update user balance
+      description: Updates the balance for a specific user.
+      operationId: updateUserBalance
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: Unique identifier of the user
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: New balance value for the user
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BalanceUpdateRequest'
+      responses:
+        '200':
+          description: Balance successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BalanceResponse'
+        '400':
+          description: Invalid request (e.g., negative balance)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    BalanceResponse:
+      type: object
+      properties:
+        userId:
+          type: integer
+          format: int64
+          description: User identifier
+        balance:
+          type: number
+          format: double
+          description: Current user balance
+          example: 100.50
+      required:
+        - userId
+        - balance
+
+    BalanceUpdateRequest:
+      type: object
+      properties:
+        balance:
+          type: number
+          format: double
+          description: New balance value to set
+          minimum: 0
+          example: 150.75
+      required:
+        - balance
+
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error message
+      required:
+        - code
+        - message

@@ -15,6 +15,10 @@
     <name>restful-payment-service</name>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -25,6 +29,31 @@
                 <configuration>
                     <executable>true</executable>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <version>7.12.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>${project.basedir}/src/main/resources/restful-payment-service-api-spec.yaml</inputSpec>
+                            <generatorName>spring</generatorName>
+                            <apiPackage>org.pl</apiPackage>
+                            <modelPackage>org.pl.model</modelPackage>
+                            <configOptions>
+                                <interfaceOnly>false</interfaceOnly>
+                                <library>spring-boot</library>
+                                <useTags>true</useTags>
+<!--                                <reactive>true</reactive>-->
+                            </configOptions>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
