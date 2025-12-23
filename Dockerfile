@@ -21,7 +21,7 @@ FROM eclipse-temurin:23-jre
 WORKDIR /app
 
 # Копируем JAR из этапа builder
-COPY --from=builder /app/target/SpringBootReactiveWebOnlineStore-0.0.1-SNAPSHOT.jar app.jar
+COPY --from=builder /app/target/SpringBootReactiveWebOnlineStoreWithRESTfulAPIOpenAPIAndRedis-0.0.1-SNAPSHOT.jar app.jar
 
 # Открываем порт
 EXPOSE 8080
