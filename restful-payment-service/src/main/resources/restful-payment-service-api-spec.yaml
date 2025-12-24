@@ -96,10 +96,10 @@ components:
           format: int64
           description: User identifier
         balance:
-          type: number
-          format: double
+          type: string
+          format: decimal
           description: Current user balance
-          example: 100.50
+          example: "100.50"
       required:
         - userId
         - balance
@@ -108,11 +108,11 @@ components:
       type: object
       properties:
         balance:
-          type: number
-          format: double
+          type: string
+          format: decimal
           description: New balance value to set
           minimum: 0
-          example: 150.75
+          example: "150.75"
       required:
         - balance
 

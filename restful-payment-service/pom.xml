@@ -17,7 +17,22 @@
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webflux</artifactId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- ОБЯЗАТЕЛЬНЫЕ зависимости для сгенерированного OpenAPI кода -->
+        <!-- Для аннотаций @Parameter, @ApiParam и т.д. в сгенерированном коде -->
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-annotations-jakarta</artifactId>
+            <version>2.2.41</version>
+        </dependency>
+
+        <!-- Для аннотаций Jakarta Validation в сгенерированном коде -->
+        <dependency>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+            <version>3.0.2</version>
         </dependency>
     </dependencies>
 
@@ -32,6 +47,8 @@
             </plugin>
 
             <plugin>
+                <!-- Команда для генерации -->
+                <!--mvn clean generate-source -->
                 <groupId>org.openapitools</groupId>
                 <artifactId>openapi-generator-maven-plugin</artifactId>
                 <version>7.12.0</version>
@@ -41,16 +58,52 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
+                            <!-- Путь к спецификации -->
                             <inputSpec>${project.basedir}/src/main/resources/restful-payment-service-api-spec.yaml</inputSpec>
+
+                            <!-- Генератор для Spring -->
                             <generatorName>spring</generatorName>
-                            <apiPackage>org.pl</apiPackage>
+
+                            <!-- Папка для сгенерированного кода -->
+                            <!--<output>${project.basedir}/target/generated-sources/openapi</output>-->
+
+                            <!-- Пакеты для сгенерированных классов -->
+                            <apiPackage>org.pl.api</apiPackage>
                             <modelPackage>org.pl.model</modelPackage>
+                            <invokerPackage>org.pl.invoker</invokerPackage>
+
                             <configOptions>
-                                <interfaceOnly>false</interfaceOnly>
                                 <library>spring-boot</library>
+                                <useSpringBoot3>true</useSpringBoot3>
+                                <useSpringController>true</useSpringController>
+                                <openApiNullable>false</openApiNullable>
+                                <!-- Только интерфейсы -->
+                                <interfaceOnly>true</interfaceOnly>
                                 <useTags>true</useTags>
-<!--                                <reactive>true</reactive>-->
+                                <!-- Включение реактивного подхода -->
+                                <!--<reactive>true</reactive>-->
                             </configOptions>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Плагин для добавления сгенерированных исходников в classpath -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.5.0</version>
+                <executions>
+                    <execution>
+                        <id>add-source</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>${project.build.directory}/generated-sources/openapi</source>
+                            </sources>
                         </configuration>
                     </execution>
                 </executions>
