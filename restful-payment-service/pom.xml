@@ -46,20 +46,22 @@
                 </configuration>
             </plugin>
 
+            <!-- OpenAPI Generator для создания серверного слоя restful-payment-service-->
             <plugin>
-                <!-- Команда для генерации -->
-                <!--mvn clean generate-source -->
+                <!-- Команда для генерации из корня многомодульного проекта-->
+                <!-- ./mvnw clean compile -pl restful-payment-service -->
                 <groupId>org.openapitools</groupId>
                 <artifactId>openapi-generator-maven-plugin</artifactId>
-                <version>7.12.0</version>
+                <version>${openapi-generator.version}</version>
                 <executions>
                     <execution>
+                        <id>generate-payment-server</id>
                         <goals>
                             <goal>generate</goal>
                         </goals>
                         <configuration>
                             <!-- Путь к спецификации -->
-                            <inputSpec>${project.basedir}/src/main/resources/restful-payment-service-api-spec.yaml</inputSpec>
+                            <inputSpec>${project.basedir}/../api-spec/restful-payment-service-api-spec.yaml</inputSpec>
 
                             <!-- Генератор для Spring -->
                             <generatorName>spring</generatorName>
@@ -68,9 +70,14 @@
                             <!--<output>${project.basedir}/target/generated-sources/openapi</output>-->
 
                             <!-- Пакеты для сгенерированных классов -->
-                            <apiPackage>org.pl.api</apiPackage>
-                            <modelPackage>org.pl.model</modelPackage>
-                            <invokerPackage>org.pl.invoker</invokerPackage>
+                            <apiPackage>org.pl.payment-service.server.payment.api</apiPackage>
+                            <modelPackage>org.pl.payment-service.server.payment.model</modelPackage>
+                            <invokerPackage>org.pl.payment-service.server.payment.invoker</invokerPackage>
+
+                            <generateApis>true</generateApis>
+                            <generateModels>true</generateModels>
+                            <generateApiTests>false</generateApiTests>
+                            <generateModelTests>false</generateModelTests>
 
                             <configOptions>
                                 <library>spring-boot</library>
@@ -80,8 +87,11 @@
                                 <!-- Только интерфейсы -->
                                 <interfaceOnly>true</interfaceOnly>
                                 <useTags>true</useTags>
-                                <!-- Включение реактивного подхода -->
-                                <!--<reactive>true</reactive>-->
+                                <!-- Отключаем лишнее -->
+                                <generateApiTests>false</generateApiTests>
+                                <generateModelTests>false</generateModelTests>
+                                <generateSupportingFiles>false</generateSupportingFiles>
+                                <generateApiDocumentation>false</generateApiDocumentation>
                             </configOptions>
                         </configuration>
                     </execution>
@@ -92,7 +102,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
-                <version>3.5.0</version>
+                <version>${build-helper.version}</version>
                 <executions>
                     <execution>
                         <id>add-source</id>

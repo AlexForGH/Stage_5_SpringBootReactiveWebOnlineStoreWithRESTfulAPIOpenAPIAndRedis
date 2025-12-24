@@ -64,6 +64,79 @@
                     <executable>true</executable>
                 </configuration>
             </plugin>
+
+            <!-- OpenAPI Generator для создания клиента restful-payment-service -->
+            <plugin>
+                <!-- Команда для генерации из корня многомодульного проекта-->
+                <!-- ./mvnw clean compile -pl web-store-service -->
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <version>${openapi-generator.version}</version>
+                <executions>
+                    <execution>
+                        <id>generate-payment-client</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            <!-- Путь к спецификации из restful-payment-service модуля -->
+                            <inputSpec>${project.basedir}/../api-spec/restful-payment-service-api-spec.yaml</inputSpec>
+
+                            <!-- Генератор для Java -->
+                            <generatorName>java</generatorName>
+
+                            <!-- WebClient для реактивного клиента -->
+                            <library>webclient</library>
+
+                            <!-- Пакеты для сгенерированных классов -->
+                            <apiPackage>org.pl.webstore.client.payment.api</apiPackage>
+                            <modelPackage>org.pl.webstore.client.payment.model</modelPackage>
+                            <invokerPackage>org.pl.webstore.client.payment.invoker</invokerPackage>
+
+                            <generateApis>true</generateApis>
+                            <generateModels>true</generateModels>
+                            <generateApiTests>false</generateApiTests>
+                            <generateModelTests>false</generateModelTests>
+
+                            <configOptions>
+                                <library>webclient</library>
+                                <useSpringBoot3>true</useSpringBoot3>
+                                <useJakartaEe>true</useJakartaEe>
+                                <openApiNullable>false</openApiNullable>
+                                <useTags>true</useTags>
+                                <reactive>true</reactive>
+                                <!-- Отключаем лишнее -->
+                                <generateApiTests>false</generateApiTests>
+                                <generateModelTests>false</generateModelTests>
+                                <generateSupportingFiles>false</generateSupportingFiles>
+                                <generateApiDocumentation>false</generateApiDocumentation>
+                            </configOptions>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Плагин для добавления сгенерированных исходников в classpath -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>${build-helper.version}</version>
+                <executions>
+                    <execution>
+                        <id>add-source</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>${project.build.directory}/generated-sources/openapi</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
