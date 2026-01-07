@@ -4,7 +4,7 @@ info:
   description: API for managing user balance (get and update).
   version: 1.0.0
 servers:
-  - url: http://localhost:8080
+  - url: payment-service:8081
     description: Local development server
 
 paths:
