@@ -166,13 +166,23 @@ public class ItemController {
         return Mono.zip(
                         itemService.getItemById(id).switchIfEmpty(Mono.error(new RuntimeException("Item not found"))),
                         sessionItemsCountsService.getCartItems(exchange),
-                        sessionItemsCountsService.checkItemsCount(exchange)
+                        sessionItemsCountsService.checkItemsCount(exchange),
+                        exchange.getSession()
                 )
                 .map(tuple -> {
                     Item item = tuple.getT1();
                     var cartItems = tuple.getT2();
                     Integer totalItemsCounts = tuple.getT3();
                     Integer itemCount = cartItems.get(id);
+                    var session = tuple.getT4();
+
+                    // Получаем toast из сессии
+                    String toastMessage = (String) session.getAttributes().get("toastMessage");
+                    String toastType = (String) session.getAttributes().get("toastType");
+
+                    // Удаляем из сессии после получения
+                    session.getAttributes().remove("toastMessage");
+                    session.getAttributes().remove("toastType");
 
                     return Rendering.view("item")
                             .modelAttribute("item", item)
@@ -183,6 +193,8 @@ public class ItemController {
                             .modelAttribute("itemsToCartAction", itemsToCartAction)
                             .modelAttribute("totalItemsCounts", totalItemsCounts)
                             .modelAttribute("buyAction", buyAction)
+                            .modelAttribute("toastMessage", toastMessage)
+                            .modelAttribute("toastType", toastType)
                             .build();
                 });
     }

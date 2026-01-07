@@ -33,7 +33,11 @@ class UserBalanceController implements org.pl.payment_service.server.payment.api
             Long userId,
             BalanceUpdateRequest balanceUpdateRequest
     ) {
+        BigDecimal balance = userBalanceService.getUserBalance(userId);
+        BalanceResponse balanceResponse = new BalanceResponse();
+        balanceResponse.setUserId(userId);
+        balanceResponse.setBalance(balance);
         userBalanceService.updateUserBalance(userId, balanceUpdateRequest.getBalance());
-        return new ResponseEntity<>((HttpStatus.OK));
+        return new ResponseEntity<>(balanceResponse, (HttpStatus.OK));
     }
 }
