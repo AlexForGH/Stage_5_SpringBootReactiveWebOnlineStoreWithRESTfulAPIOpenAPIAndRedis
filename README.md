@@ -10,7 +10,7 @@
     - removing products from the cart
     - searching for products by name
     - sorting products
-    - creating orders for products
+    - creating product orders, with a check of the user's available balance, which is requested from the payment service via the RESTful API
 
 ### Application deployment:
     - Before you begin, you'll need:
@@ -42,7 +42,7 @@
     - удаление товаров из корзины
     - поиск товаров по названию
     - сортировка товаров
-    - создание заказов на товары
+    - создание заказов на товары, с проверкой доступного баланса пользователя, который запрашивается из сервиса оплаты по RESTful API
 
 ### Развертывание приложения:
     - Перед началом работы необходимы:
