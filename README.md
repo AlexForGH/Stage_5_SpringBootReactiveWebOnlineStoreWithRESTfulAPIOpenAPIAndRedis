@@ -25,8 +25,7 @@
     2. Without an IDE
             - clone the repository
             - run the following Docker commands:
-                - docker build -t sb‑web‑store‑app .
-                - docker run -p 8080:8080 sb‑web‑store‑app:latest
+                    - docker compose up --build
             - go to the browser at http://localhost:8080/
                 - the application's start page will open.
 
@@ -57,7 +56,6 @@
     2. Без использования IDE
             - клонировать репозиторий
             - выполнить команды докера:
-                    - docker build -t sb-web-store-app .
-                    - docker run -p 8080:8080 sb-web-store-app:latest
+                    - docker compose up --build
             - зайти в браузер по адресу http://localhost:8080/
             - откроется стартовая страница приложения.
