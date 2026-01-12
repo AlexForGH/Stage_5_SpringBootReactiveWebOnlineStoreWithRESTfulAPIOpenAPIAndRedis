@@ -36,14 +36,11 @@ public class ItemService {
         Mono<Long> countMono;
 
         if (title == null || title.isEmpty()) {
-            itemsMono = itemRepository.findAll()
-                    .collectList();
+            itemsMono = itemRepository.findAll().collectList();
             countMono = itemRepository.count();
         } else {
-            itemsMono = itemRepository.findByTitleContainingIgnoreCase(title)
-                    .collectList();
-            countMono = itemRepository.findByTitleContainingIgnoreCase(title)
-                    .count();
+            itemsMono = itemRepository.findByTitleContainingIgnoreCase(title).collectList();
+            countMono = itemRepository.findByTitleContainingIgnoreCase(title).count();
         }
 
         return Mono.zip(itemsMono, countMono)

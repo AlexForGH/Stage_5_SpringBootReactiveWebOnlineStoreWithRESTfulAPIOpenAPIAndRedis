@@ -1,0 +1,8 @@
+# Используем официальный образ Redis 7.4.2 на базе Debian Bookworm
+FROM redis:7.4.2-bookworm
+
+# Порт, который будет прослушиваться
+EXPOSE 6379
+
+# Команда запуска сервера Redis (по умолчанию)
+CMD ["redis-server"]
