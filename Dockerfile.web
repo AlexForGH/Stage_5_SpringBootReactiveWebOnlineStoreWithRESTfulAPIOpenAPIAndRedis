@@ -1,0 +1,43 @@
+# -------- Этап 1: Сборка JAR --------
+FROM eclipse-temurin:23-jdk AS builder
+WORKDIR /app
+
+# Копируем Maven Wrapper
+COPY .mvn/ .mvn/
+COPY mvnw mvnw
+WORKDIR /app
+
+# Копируем pom.xml
+COPY pom.xml .
+
+# Копируем спецификацию API
+COPY api-spec/ ./api-spec/
+
+# Копируем POM файлы модулей
+COPY restful-payment-service/pom.xml ./restful-payment-service/
+COPY web-store-service/pom.xml ./web-store-service/
+
+# Копируем исходный код
+COPY restful-payment-service/ ./restful-payment-service/
+COPY web-store-service/ ./web-store-service/
+
+# Собираем JAR-ники сервисов без тестов
+#     -pl — запустить только указанный модуль
+#     -am — собрать и зависимости
+RUN ./mvnw clean package -pl web-store-service -am -DskipTests
+
+
+# -------- Этап 2: Запуск сервиса вэб-приложения --------
+FROM eclipse-temurin:23-jre
+WORKDIR /app
+
+# Копируем JAR из builder
+COPY --from=builder /app/web-store-service/target/web-store-service-0.0.1-SNAPSHOT.jar app.jar
+
+# Открываем порт
+EXPOSE 8080
+
+ENTRYPOINT ["java", "-jar", "app.jar"]
+
+# CMD будет передан как аргументы к ENTRYPOINT
+CMD ["--spring.data.redis.host=redis-cache-service", "--restful.payment.service.url=http://payment-service:8081"]

@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  payment-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.payment
+    ports:
+      - "8081:8081"
+    networks:
+      - app-network
+
+  web-store-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    ports:
+      - "8080:8080"
+    networks:
+      - app-network
+
+  redis-cache-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.redis-cache
+    ports:
+      - "6379:6379"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

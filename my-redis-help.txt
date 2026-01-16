@@ -1,0 +1,6 @@
+for local devs need start redis server:
+    - docker run --name redis-server -it --rm -p 6379:6379 redis:7.4.2-bookworm sh -c "redis-server"
+        or
+    - docker run --name redis-server --rm -p 6379:6379 redis:7.4.2-bookworm redis-server
+for use redis-cli:
+    - docker run -it --rm --network host redis:7.4.2-bookworm redis-cli
